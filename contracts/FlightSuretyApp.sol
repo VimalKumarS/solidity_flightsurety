@@ -6,7 +6,7 @@ pragma solidity >=0.8.0;
 // More info: https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2018/november/smart-contract-insecurity-bad-arithmetic/
 
 import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "./FlightSuretyData.sol";
+// import "./FlightSuretyData.sol";
 
 /************************************************** */
 /* FlightSurety Smart Contract                      */
@@ -392,27 +392,27 @@ contract FlightSuretyApp {
 }
 
 // FlightSurety data contract interface
-// abstract contract FlightSuretyData {
-//   // Utility functions
-//   function isOperational() public view returns(bool);
-//   function setOperatingStatus(bool mode) external;
+abstract contract FlightSuretyData {
+  // Utility functions
+   function isOperational() virtual public view returns(bool);
+  function setOperatingStatus(bool mode) virtual external;
 
-//   // Airlines
-//   function registerAirline(string calldata name, address addr) external returns(bool);
-//   function isAirline(address airline) external view returns(bool);
-//   function isFundedAirline(address airline) external view returns(bool);
-//   function getRegisteredAirlines() external view returns(address[] memory);
-//   function fundAirline(address addr) payable external;
+  // Airlines
+  function registerAirline(string calldata name, address addr) virtual external returns(bool);
+  function isAirline(address airline) virtual external view returns(bool);
+  function isFundedAirline(address airline) virtual external view returns(bool);
+  function getRegisteredAirlines() virtual external view returns(address[] memory);
+  function fundAirline(address addr) virtual payable external;
 
-//   // Flights
-//   function registerFlight(address airline, string calldata flight, string calldata from, string calldata to, uint256 timestamp) external;
-//   function isFlight(address airline, string calldata flight, uint256 timestamp) external view returns(bool);
-//   function isLandedFlight(address airline, string calldata flight, uint256 timestamp) external view returns(bool);
-//   function processFlightStatus(address airline, string calldata flight, uint256 timestamp, uint8 statusCode) external;
-//   function getFlightStatusCode(address airline, string calldata flight, uint256 timestamp) external view returns(uint8);
+  // Flights
+  function registerFlight(address airline, string calldata flight, string calldata from, string calldata to, uint256 timestamp) virtual external;
+  function isFlight(address airline, string calldata flight, uint256 timestamp) virtual external view returns(bool);
+  function isLandedFlight(address airline, string calldata flight, uint256 timestamp) virtual external view returns(bool);
+  function processFlightStatus(address airline, string calldata flight, uint256 timestamp, uint8 statusCode) virtual external;
+  function getFlightStatusCode(address airline, string calldata flight, uint256 timestamp) virtual external view returns(uint8);
 
-//   // Passengers
-//   function buy(address airline, string calldata flight, uint256 timestamp, address passenger, uint256 amount, uint256 multiplier) external payable;
-//   function isInsured(address passenger, address airline, string calldata flight, uint256 timestamp) external view returns (bool);
-//   function pay(address passenger) external;
-// }
+  // Passengers
+  function buy(address airline, string calldata flight, uint256 timestamp, address passenger, uint256 amount, uint256 multiplier) virtual external payable;
+  function isInsured(address passenger, address airline, string calldata flight, uint256 timestamp) virtual external view returns (bool);
+  function pay(address passenger) virtual external;
+}
